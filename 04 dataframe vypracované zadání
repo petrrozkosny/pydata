@@ -1,0 +1,20 @@
+# Cvičení vypracováno
+import pandas as pd
+# Bod 1
+df = pd.read_csv('https://raw.githubusercontent.com/petrrozkosny/pydata/main/pydata_data.csv',delimiter=';')
+
+# Bod 2
+df['DATE'] = pd.to_datetime(df['DATE'])
+# Bod 3
+df['ROK'] =  df['DATE'].dt.year
+
+# Bod 4
+df['MESIC'] = df['DATE'].dt.month
+# Bod 5
+df = df.loc[df['NAME']=='RUZYNE']
+# Bod 6
+df = df.groupby(by=['ROK','MESIC'],as_index=False)['PRCP'].sum()
+# Bod 7
+df = df.pivot(index='ROK',columns='MESIC')
+# Bod 8
+df.fillna('--')
