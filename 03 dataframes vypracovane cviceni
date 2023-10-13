@@ -1,0 +1,23 @@
+# Cvičení vypracováno
+import pandas as pd
+# Bod 1
+df = pd.read_csv('https://raw.githubusercontent.com/petrrozkosny/pydata/main/pydata_data.csv',delimiter=';')
+# Bod 2
+df = df[['DATE','NAME','PRCP','TMAX','TMIN']]
+# Bod 3
+df['ROZDIL_TEPLOT'] = df['TMAX'] - df['TMIN']
+# Bod 4
+df['DATE'] = pd.to_datetime(df['DATE'])
+# Bod 5
+df['ROK'] = df['DATE'].dt.year
+# Bod 6
+df1 = df.copy()
+# Bod 7
+df1 = df1.loc[df1['NAME']=='RUZYNE']
+# Bod 8
+df1['ROZDIL_OD_MAX_TEPLOTY'] = df1['TMAX'] - df1['TMAX'].max()
+# Bod 9
+df1.set_index('DATE',drop=True,inplace=True)
+# Bod 10
+df1.index.is_unique
+
