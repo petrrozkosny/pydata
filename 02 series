@@ -1,0 +1,31 @@
+# Cvičení vypracováno
+
+#Bod 1
+dest_kumulativne = dest.copy()
+dest_kumulativne = dest_kumulativne.dropna()
+
+# Bod 2
+dest_kumulativne = dest_kumulativne.cumsum()
+print(dest_kumulativne.head(20))
+
+# Bod 3
+dest_data_2010 = dest.filter(like='2010').agg(['sum','max'])
+print(dest_data_2010)
+
+# Bod 4
+dest_data_klouzave = dest.rolling(window=5,min_periods=1).sum()
+print(dest_data_klouzave.head(20))
+
+# Bod 5
+dest_datumy = dest.copy()
+
+#Bod 6
+dest_datumy.index = pd.to_datetime(dest_datumy.index)
+
+# Bod 7
+dest_datumy.index = dest_datumy.index.year
+
+# Bod 8
+dest_datumy = dest_datumy.groupby('DATE').sum()
+print(dest_datumy.head())
+
